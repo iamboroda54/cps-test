@@ -1,5 +1,6 @@
+import { ApiController } from "../model/apiController.mjs";
 import { ApiRoute } from "../model/apiRoute.mjs";
-import { ApiRouter } from "../model/apiRouter.mjs";
+
 import { DependencyUtils } from "../utils/dependencyUtils.mjs";
 import { PopulationDataSetUtils } from "../utils/populationUtils.mjs";
 
@@ -13,7 +14,7 @@ class StateCityDependency {
     city;
 }
 
-export default class PopulatonApiRouter extends ApiRouter {
+export default class PopulatonApiController extends ApiController {
     baseUrl = "/population";
 
     getPopulation = new ApiRoute({

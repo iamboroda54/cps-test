@@ -27,16 +27,18 @@ function initPopulationDataSet() {
 }
 
 async function initApi() {
-    const apiRoutersPathList = await glob("src/api/**/*.mjs");
+    const apiControllerPathList = await glob("src/api/**/*.mjs");
 
-    for (const apiRouterPath of apiRoutersPathList) {
-        const apiRouter = new (await import(`./${apiRouterPath}`)).default();
+    for (const apiControllerPath of apiControllerPathList) {
+        const apiController = new (
+            await import(`./${apiControllerPath}`)
+        ).default();
 
-        for (const apiRoute of Object.values(apiRouter).filter(
+        for (const apiRoute of Object.values(apiController).filter(
             (v) => v instanceof ApiRoute
         )) {
             app[apiRoute.method.toLocaleLowerCase()](
-                `/api${apiRouter.baseUrl}${apiRoute.url}`,
+                `/api${apiController.baseUrl}${apiRoute.url}`,
                 (req, res) => apiRoute.handler(req, res, appContext)
             );
         }

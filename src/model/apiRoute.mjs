@@ -13,7 +13,7 @@ export class ApiRoute {
     url;
 
     /**
-     * @type {(req: import("express").Request<{}, any, any, QueryString.ParsedQs, Record<string, any>>, res: import("express").Response<any, Record<string, any>, number>, context: import("./appContext.mjs").AppContext) => Promise<any>}
+     * @type {(req: import("express").Request, res: import("express").Response, context: import("./appContext.mjs").AppContext) => Promise<any>}
      */
     handler;
 }

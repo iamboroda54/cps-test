@@ -1,4 +1,4 @@
-export class ApiRouter {
+export class ApiController {
     /** @type {string} */
     baseUrl;
 }
