@@ -19,7 +19,7 @@ function initPopulationDataSet() {
         const [city, state, population] = row.split(",");
         dataSet.set(
             PopulationDataSetUtils.getEntityKey(state, city),
-            population
+            +population
         );
     }
 
@@ -44,10 +44,9 @@ async function initApi() {
 }
 
 async function runApp() {
-    await initApi();
+    app.use(express.text());
 
-    app.use(express.text({ type: "text/plain" }));
-    app.use(express.json());
+    await initApi();
 
     app.listen(port, () => {
         console.log(`App listening on port ${port}`);

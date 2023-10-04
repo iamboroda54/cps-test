@@ -42,8 +42,8 @@ export default class PopulatonApiRouter extends ApiRouter {
         method: "PUT",
         url: "/state/:state/city/:city",
         handler: (req, res, context) => {
-            console.log(req.body);
             const population = +req.body;
+
             if (!Number.isInteger(population)) {
                 return res.status(400).send("Incorrect body value");
             }
@@ -53,11 +53,19 @@ export default class PopulatonApiRouter extends ApiRouter {
                 deps.state,
                 deps.city
             );
-            const isNew = context.populationDataSet.has(entityKey);
+            const isNew = !context.populationDataSet.has(entityKey);
 
             context.populationDataSet.set(entityKey, population);
 
-            return res.status(isNew ? 201 : 200);
+            this.#dumpDataSet();
+
+            return res.status(isNew ? 201 : 200).send();
         },
     });
+
+    #dumpDataSet() {
+        setTimeout(() => {
+            // dump in-memory dataset to underlying storage (RDS, DynamoDB, Cosmos etc)...
+        });
+    }
 }
