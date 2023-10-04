@@ -14,6 +14,7 @@ const appContext = new AppContext({
 function initPopulationDataSet() {
     const dataSet = new Map();
     const rawData = fs.readFileSync("data/city_populations.csv");
+
     for (const row of rawData.toString().split(/\r?\n/)) {
         const [city, state, population] = row.split(",");
         dataSet.set(
@@ -21,6 +22,7 @@ function initPopulationDataSet() {
             population
         );
     }
+
     return dataSet;
 }
 
